@@ -22,18 +22,87 @@ class QuizController extends Controller
         return view('quiz.quiz');
     }
 
-    /**
-     * Get questions for a specific difficulty
-     */
     public function getQuestions($difficulty)
     {
         try {
-            $questions = Question::where('difficulty', $difficulty)
-                ->where('is_active', true)
-                ->with(['options', 'answers'])
-                ->inRandomOrder()
-                ->limit(10) // Limit to 10 questions per quiz
-                ->get();
+            // Define question types based on difficulty level
+            $questionTypesByDifficulty = [
+                'easy' => [
+                    'multiple_choice',
+                    'true_false',
+                    'identification'
+                ],
+                'medium' => [
+                    'multiple_choice',
+                    'true_false',
+                    'identification',
+                    'fill_in_blank'
+                ],
+                'hard' => [
+                    'multiple_choice',
+                    'true_false',
+                    'identification',
+                    'fill_in_blank',
+                    'enumeration'
+                ]
+            ];
+
+            // Get available question types for this difficulty
+            $availableTypes = $questionTypesByDifficulty[$difficulty] ?? $questionTypesByDifficulty['easy'];
+            
+            $questions = collect();
+            $targetTotal = 10; // Target total questions
+            $typeCount = count($availableTypes);
+            
+            // Calculate random distribution that adds up to 10
+            $distribution = $this->generateRandomDistribution($targetTotal, $typeCount);
+            
+            // Get questions for each type based on the random distribution
+            foreach ($availableTypes as $index => $type) {
+                $count = $distribution[$index];
+                
+                if ($count > 0) {
+                    // Check how many questions are available for this type
+                    $availableCount = Question::where('difficulty', $difficulty)
+                        ->where('question_type', $type)
+                        ->where('is_active', true)
+                        ->count();
+
+                    if ($availableCount > 0) {
+                        // Take the minimum of requested count or available count
+                        $actualCount = min($count, $availableCount);
+                        
+                        $typeQuestions = Question::where('difficulty', $difficulty)
+                            ->where('question_type', $type)
+                            ->where('is_active', true)
+                            ->with(['options', 'answers'])
+                            ->inRandomOrder()
+                            ->limit($actualCount)
+                            ->get();
+
+                        $questions = $questions->merge($typeQuestions);
+                    }
+                }
+            }
+
+            // If we didn't get enough questions, fill remaining from any available type
+            if ($questions->count() < $targetTotal) {
+                $remaining = $targetTotal - $questions->count();
+                $usedIds = $questions->pluck('question_id')->toArray();
+                
+                $additionalQuestions = Question::where('difficulty', $difficulty)
+                    ->where('is_active', true)
+                    ->whereNotIn('question_id', $usedIds)
+                    ->with(['options', 'answers'])
+                    ->inRandomOrder()
+                    ->limit($remaining)
+                    ->get();
+                    
+                $questions = $questions->merge($additionalQuestions);
+            }
+
+            // Shuffle all questions so they're not grouped by type
+            $questions = $questions->shuffle();
 
             if ($questions->isEmpty()) {
                 return response()->json([
@@ -66,6 +135,7 @@ class QuizController extends Controller
 
             return response()->json([
                 'success' => true,
+                'total_questions' => $questions->count(),
                 'questions' => $formattedQuestions
             ]);
 
@@ -81,6 +151,41 @@ class QuizController extends Controller
                 'message' => 'Error fetching questions: ' . $e->getMessage()
             ], 500);
         }
+    }
+
+    /**
+     * Generate a random distribution of numbers that sum to a target
+     * 
+     * @param int $target The target sum
+     * @param int $parts Number of parts to split into
+     * @return array Array of random integers that sum to target
+     */
+    private function generateRandomDistribution($target, $parts)
+    {
+        if ($parts <= 0) {
+            return [];
+        }
+        
+        if ($parts === 1) {
+            return [$target];
+        }
+        
+        // Start with at least 1 for each part (if target allows)
+        $minPerPart = 1;
+        if ($target < $parts * $minPerPart) {
+            $minPerPart = 0; // If target is too small, some parts can be 0
+        }
+        
+        $distribution = array_fill(0, $parts, $minPerPart);
+        $remaining = $target - ($minPerPart * $parts);
+        
+        // Distribute remaining randomly
+        for ($i = 0; $i < $remaining; $i++) {
+            $randomIndex = rand(0, $parts - 1);
+            $distribution[$randomIndex]++;
+        }
+        
+        return $distribution;
     }
 
     /**
