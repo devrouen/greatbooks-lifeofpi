@@ -160,7 +160,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('convention') ? 'active' : '' }}" href="{{ route('convention') }}">
+            <a class="nav-link {{ request()->routeIs('conventions') ? 'active' : '' }}" href="{{ route('conventions') }}">
               Conventions
             </a>
           </li>

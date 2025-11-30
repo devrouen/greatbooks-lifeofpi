@@ -18,9 +18,9 @@ Route::get('/timeline', function () {
     return view('timeline');
 })->name('timeline');
 
-Route::get('/convention', function () {
-    return view('convention');
-})->name('convention');
+Route::get('/conventions', function () {
+    return view('conventions');
+})->name('conventions');
 
 Route::get('/author', function () {
     return view('author');

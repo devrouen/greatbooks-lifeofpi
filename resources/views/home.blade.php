@@ -140,7 +140,7 @@
                         </ul>
                     </div>
                     <div class="nav-card-footer">
-                        <a href="{{ route('convention') }}" class="btn btn-outline-warning">
+                        <a href="{{ route('conventions') }}" class="btn btn-outline-warning">
                             Study Conventions <i class="fas fa-arrow-right ms-1"></i>
                         </a>
                     </div>
