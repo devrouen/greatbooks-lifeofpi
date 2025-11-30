@@ -1,0 +1,599 @@
+/* =========================================
+   Author Page - Yann Martel
+   Using Conventions Design System
+   ========================================= */
+
+:root {
+    --primary-color: #667eea;
+    --primary-color-dark: #4c51bf;
+    --accent-color: #9f7aea;
+    --highlight-color: #f6ad55;
+    --bg-page: linear-gradient(135deg, #f5f6fa 0%, #bdb7d9 40%, #ede9fe 100%);
+    --bg-card: #ffffff;
+    --bg-soft: #fafaff;
+    --border-color: #e2e8f0;
+    --text-primary: #2d3748;
+    --text-secondary: #212325;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 18px 45px rgba(15, 23, 42, 0.16);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #9f7aea 100%);
+    --gradient-soft: linear-gradient(135deg, #eef2ff 0%, #fdf2ff 100%);
+}
+
+/* Page background */
+body {
+    background: var(--bg-page);
+}
+
+/* ============================
+   Wrapper + Background Blobs
+   ============================ */
+
+.author-container {
+    padding: 2.5rem 0 3.5rem;
+    position: relative;
+}
+
+/* floating pastel blobs (same idea as conventions) */
+.author-container::before,
+.author-container::after {
+    content: '';
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    border-radius: 999px;
+    filter: blur(70px);
+    opacity: 0.26;
+    z-index: -1;
+    pointer-events: none;
+    animation: floatBlob 14s ease-in-out infinite alternate;
+}
+
+.author-container::before {
+    top: 6%;
+    left: -10%;
+    background: rgba(129, 140, 248, 0.6);
+}
+
+.author-container::after {
+    bottom: 4%;
+    right: -6%;
+    background: rgba(246, 173, 85, 0.6);
+    animation-delay: 3s;
+}
+
+/* ============================
+   HERO SECTION (image + intro)
+   ============================ */
+
+.author-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1.5fr);
+    gap: 2.5rem;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding: 1.75rem 1.75rem 1.9rem;
+    border-radius: 26px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 16px 40px rgba(148, 163, 254, 0.25);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    overflow: hidden;
+}
+
+.author-hero::before {
+    content: '';
+    position: absolute;
+    inset: -40%;
+    background: radial-gradient(circle at top left, rgba(102, 126, 234, 0.16), transparent 60%);
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+/* Author image area */
+.author-photo-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.author-photo-frame {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transform: translateY(0);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    background: #e5e7f9;
+}
+
+.author-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.author-photo-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 40px;
+    background: radial-gradient(circle at 10% 0%, rgba(102, 126, 234, 0.35), transparent 60%);
+    opacity: 0.9;
+    z-index: -1;
+}
+
+.author-photo-wrapper:hover .author-photo-frame {
+    transform: translateY(-8px) rotate3d(1, 1, 0, 6deg);
+    box-shadow: 0 25px 55px rgba(79, 70, 229, 0.35);
+}
+
+/* Hero text */
+.author-hero-content .page-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.author-hero-content .page-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    margin-top: 0.6rem;
+    border-radius: 999px;
+    background: var(--gradient-primary);
+}
+
+.page-description {
+    margin-top: 0.75rem;
+    max-width: 620px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+}
+
+.author-meta-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+}
+
+.meta-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-secondary);
+    border: 1px solid rgba(148, 163, 254, 0.4);
+    box-shadow: 0 6px 14px rgba(148, 163, 254, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.meta-chip:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(148, 163, 254, 0.35);
+}
+
+/* ============================
+   Sections (like convention-section)
+   ============================ */
+
+.author-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* each block uses conventions-style striped background & animation */
+.author-section {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+    position: relative;
+    padding: 1.2rem 1.2rem 1.2rem 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        120deg,
+        rgba(102, 126, 234, 0.05),
+        rgba(118, 75, 162, 0.02)
+    );
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(22px);
+    animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* stagger like conventions */
+.author-section:nth-child(1) { animation-delay: 0.10s; }
+.author-section:nth-child(2) { animation-delay: 0.18s; }
+.author-section:nth-child(3) { animation-delay: 0.26s; }
+.author-section:nth-child(4) { animation-delay: 0.34s; }
+.author-section:nth-child(5) { animation-delay: 0.42s; }
+
+/* only one child (.section-content), but layout matches conventions */
+.section-content {
+    flex: 1;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.9rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+}
+
+/* decorative glow behind card (like conventions) */
+.section-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(102, 126, 234, 0.09), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* hover behavior like convention-section */
+.author-section:hover .section-content,
+.author-section:focus-within .section-content {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.55);
+    background-color: #fdfcff;
+}
+
+.author-section:hover .section-content::before,
+.author-section:focus-within .section-content::before {
+    opacity: 1;
+}
+
+/* header pill + title echo conventions look */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.section-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(102, 126, 234, 0.4);
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+/* underline animation like conventions h2 */
+.section-header h2 span {
+    display: none; /* you had <span></span> – keep it invisible if unused */
+}
+
+.section-header h2::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    border-radius: 999px;
+    margin-top: 0.4rem;
+    background: var(--gradient-primary);
+    transition: width 0.25s ease;
+}
+
+.author-section:hover .section-header h2::after,
+.author-section:focus-within .section-header h2::after {
+    width: 70px;
+}
+
+/* ============================
+   Inner text blocks
+   ============================ */
+
+.bio-card p,
+.achievement-item p,
+.process-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+/* Achievements layout */
+.achievement-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 1.5rem;
+}
+
+.achievement-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-primary);
+}
+
+/* Themes grid */
+.themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+/* Works grid */
+.works-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.1rem;
+}
+
+.work-item strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--text-primary);
+}
+
+.work-item p {
+    font-size: 0.94rem;
+    color: var(--text-secondary);
+}
+
+/* Process */
+.process-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================
+   INNER CARDS – same hover feel
+   ============================ */
+
+.bio-card,
+.achievement-item,
+.theme-card,
+.work-item,
+.process-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease,
+        background-color 0.28s ease,
+        filter 0.28s ease;
+    overflow: hidden;
+}
+
+/* inner glow like conventions */
+.bio-card::before,
+.achievement-item::before,
+.theme-card::before,
+.work-item::before,
+.process-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(148, 163, 254, 0.15),
+        transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.bio-card:hover,
+.achievement-item:hover,
+.theme-card:hover,
+.work-item:hover,
+.process-content:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(129, 140, 248, 0.5);
+    background-color: #fdfcff;
+    filter: brightness(1.03);
+}
+
+.bio-card:hover::before,
+.achievement-item:hover::before,
+.theme-card:hover::before,
+.work-item:hover::before,
+.process-content:hover::before {
+    opacity: 1;
+}
+
+/* Theme card specifics */
+.theme-card {
+    padding: 1.2rem 1.3rem;
+}
+
+.theme-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-primary);
+}
+
+.theme-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* Work item specifics */
+.work-item {
+    padding: 1rem 1.1rem;
+}
+
+/* ============================
+   Animations (same as conventions)
+   ============================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(15px, -10px) scale(1.05); }
+    100% { transform: translate(-10px, 10px) scale(1.02); }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+
+@media (max-width: 992px) {
+    .author-hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.75rem;
+    }
+
+    .author-photo-frame {
+        width: 230px;
+        height: 230px;
+    }
+
+    .author-hero-content {
+        text-align: center;
+    }
+
+    .author-hero-content .page-title::after {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .author-meta-chips {
+        justify-content: center;
+    }
+
+    .page-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .achievement-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .author-section {
+        flex-direction: column;
+        padding: 1.1rem 1.1rem 1.3rem;
+    }
+
+    .section-content {
+        padding: 1.5rem 1.4rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .author-container {
+        padding-top: 2.4rem;
+    }
+
+    .author-hero-content .page-title {
+        font-size: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================
+   Fix spacing / uncrowd inner cards
+   ============================ */
+
+/* Give the main section card a bit more padding */
+.section-content {
+    padding: 2rem 2.1rem;
+}
+
+/* More space between section header and inner card(s) */
+.section-header {
+    margin-bottom: 1.3rem;
+}
+
+/* Make each inner block sit a bit lower from the heading */
+.bio-card,
+.achievement-content,
+.themes-grid,
+.works-container,
+.process-content {
+    margin-top: 1.1rem;
+}
+
+/* Inner cards: increase padding slightly so text can breathe */
+.bio-card,
+.achievement-item,
+.theme-card,
+.work-item,
+.process-content {
+    padding: 1.4rem 1.5rem;
+}
+
+/* Grids: a bit more gap between columns/rows */
+.achievement-content {
+    gap: 1.8rem;
+}
+
+.themes-grid {
+    gap: 1.5rem;
+}
+
+.works-container {
+    gap: 1.5rem;
+}
+
+/* On smaller screens, add extra vertical spacing so nothing feels cramped */
+@media (max-width: 768px) {
+    .section-content {
+        padding: 1.6rem 1.5rem;
+    }
+
+    .bio-card,
+    .achievement-item,
+    .theme-card,
+    .work-item,
+    .process-content {
+        padding: 1.3rem 1.35rem;
+    }
+
+    .themes-grid,
+    .works-container,
+    .achievement-content {
+        gap: 1.25rem;
+    }
+}

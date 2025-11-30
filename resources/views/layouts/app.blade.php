@@ -6,6 +6,9 @@
   <title>@yield('title', 'Life of Pi - Literary Analysis')</title>
   <meta name="description" content="@yield('description', 'Comprehensive analysis of Life of Pi by Yann Martel - Timeline, conventions, biography, summary, and analysis.')">
 
+<link rel="icon" type="image/png" href="{{ asset('images/pi.jpg') }}">
+<link rel="apple-touch-icon" href="{{ asset('images/pi.jpg') }}">
+
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -24,7 +27,7 @@
       background: black;
       backdrop-filter: blur(6px);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;;
+      transition: all 0.3s ease;
     }
 
     .navbar.scrolled {
@@ -99,19 +102,6 @@
       box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
     }
 
-    /* Mobile improvements */
-    @media (max-width: 991px) {
-      .navbar-nav .nav-link {
-        margin: 0.15rem 0;
-        padding: 0.4rem 0.8rem !important;
-      }
-      
-      .btn-quiz {
-        margin-top: 0.3rem;
-        width: auto;
-      }
-    }
-
     /* Navbar toggler animation */
     .navbar-toggler {
       border: none;
@@ -133,6 +123,65 @@
     footer {
       background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
     }
+
+    /* ===========================
+       Mobile & Tablet (<= 991px)
+       =========================== */
+    @media (max-width: 991px) {
+      .navbar {
+        height: auto;                 /* let it grow with content */
+        padding: 0.5rem 0;           
+      }
+
+      .navbar .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .navbar-brand {
+        padding-right: 0;             /* remove huge right space on mobile */
+        font-size: 1.1rem;
+      }
+
+      .navbar-collapse {
+        margin-top: 0.6rem;
+      }
+
+      /* Remove big left margin from nav links when collapsed */
+      .navbar-nav.ms-5 {
+        margin-left: 0 !important;
+      }
+
+      .navbar-nav {
+        width: 100%;
+      }
+
+      .navbar-nav .nav-link {
+        margin: 0.15rem 0;
+        padding: 0.45rem 0.8rem !important;
+        width: 100%;                  /* full-width tappable area */
+        border-radius: 10px;
+      }
+
+      /* Stack the "Quiz Arcade" button nicely under links */
+      .navbar-nav:last-child {
+        margin-left: 0 !important;
+        margin-top: 0.3rem;
+      }
+
+      .btn-quiz {
+        margin-top: 0.3rem;
+        width: 100%;                  /* full width on mobile */
+        text-align: center;
+      }
+    }
+
+    /* Extra small tweaks (<= 576px) */
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 1rem;
+      }
+    }
   </style>
 
   @stack('styles')
@@ -148,7 +197,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-5">
+        <ul class="navbar-nav ms-5 me-auto">
           <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
               Home

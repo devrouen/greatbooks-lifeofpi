@@ -1,0 +1,364 @@
+/* ============================
+   Global Timeline Page Styles
+   ============================ */
+
+:root {
+    --primary-color: #667eea;
+    --primary-color-dark: #4c51bf;
+    --accent-color: #764ba2;
+    --bg-page: linear-gradient(135deg, #f5f6fa 0%, #bdb7d9 40%, #ede9fe 100%);
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --text-primary: #1f2933;
+    --text-secondary: #212325;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Page background (if not already set in layout) */
+body {
+    background: var(--bg-page);
+}
+
+/* ============================
+   Header
+   ============================ */
+
+.content-header {
+    margin: 2.5rem 0 1.5rem;
+    text-align: center;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.page-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.page-title::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    border-radius: 999px;
+    margin: 0.75rem auto 0;
+    background: var(--gradient-primary);
+}
+
+.page-description {
+    max-width: 680px;
+    margin: 1rem auto 0;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+}
+
+/* ============================
+   Timeline
+   ============================ */
+
+.timeline-container {
+    position: relative;
+    margin: 3rem 0 4rem;
+    padding: 1rem 0;
+}
+
+/* Subtle animated center line (desktop) */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 999px;
+    opacity: 0.85;
+    animation: pulseLine 3s ease-in-out infinite;
+}
+
+/* Each row */
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin: 2.5rem 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* Staggered delay for each item */
+.timeline-item:nth-child(1) { animation-delay: 0.15s; }
+.timeline-item:nth-child(2) { animation-delay: 0.3s; }
+.timeline-item:nth-child(3) { animation-delay: 0.45s; }
+.timeline-item:nth-child(4) { animation-delay: 0.6s; }
+.timeline-item:nth-child(5) { animation-delay: 0.75s; }
+.timeline-item:nth-child(6) { animation-delay: 0.9s; }
+
+/* Alternate sides on desktop */
+.timeline-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+/* Connector dot where the year meets the line */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* Year pill */
+.timeline-year {
+    flex: 0 0 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    border-radius: 999px;
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+/* Push content away from center line */
+.timeline-item:nth-child(even) .timeline-year {
+    margin-right: 2rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-year {
+    margin-left: 2rem;
+}
+
+/* Card content */
+.timeline-content {
+    flex: 1;
+    background: var(--bg-card);
+    padding: 1.8rem 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+}
+
+/* Offset from center line */
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: 2rem;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-right: 2rem;
+}
+
+/* Hover/focus interaction */
+.timeline-item:hover .timeline-content,
+.timeline-item:focus-within .timeline-content {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.55);
+    background-color: #fdfcff;
+}
+
+.timeline-item:hover .timeline-year,
+.timeline-item:focus-within .timeline-year {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 18px rgba(102, 126, 234, 0.55);
+    filter: brightness(1.05);
+}
+
+.timeline-item:hover::before,
+.timeline-item:focus-within::before {
+    box-shadow: 0 0 0 6px rgba(102, 126, 234, 0.5);
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Optional "active" state if you add JS later */
+.timeline-item.is-active .timeline-content {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(118, 75, 162, 0.7);
+}
+
+.timeline-item.is-active .timeline-year {
+    box-shadow: 0 0 20px rgba(118, 75, 162, 0.7);
+    filter: brightness(1.08);
+}
+
+/* Heading & text inside card */
+.timeline-content h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.timeline-content p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Tiny accent underline on hover for title */
+.timeline-content h3::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    border-radius: 999px;
+    margin-top: 0.4rem;
+    background: var(--gradient-primary);
+    transition: width 0.25s ease;
+}
+
+.timeline-item:hover .timeline-content h3::after,
+.timeline-item:focus-within .timeline-content h3::after {
+    width: 50px;
+}
+
+/* ============================
+   Animations
+   ============================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseLine {
+    0%, 100% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+
+@media (max-width: 992px) {
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+/* Tablet & mobile adjustments */
+@media (max-width: 768px) {
+
+    .timeline-container {
+        margin: 2rem 0 3rem;
+        padding-left: 1rem;
+    }
+
+    /* Line moves to the left side */
+    .timeline-container::before {
+        left: 24px;
+        transform: none;
+    }
+
+    /* All items become single-column */
+    .timeline-item {
+        flex-direction: row !important;
+        align-items: flex-start;
+        margin: 1.75rem 0;
+    }
+
+    /* Dot aligns with left line */
+    .timeline-item::before {
+        left: 24px;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Year badge shrinks and aligns left */
+    .timeline-year {
+        flex: 0 0 60px;
+        height: 60px;
+        font-size: 0.9rem;
+        margin: 0 1rem 0 0 !important;
+    }
+
+    /* Content goes full width to the right of the year */
+    .timeline-content {
+        margin: 0 !important;
+        padding: 1.4rem 1.3rem;
+    }
+
+    .page-description {
+        font-size: 0.98rem;
+        padding: 0 1rem;
+    }
+}
+
+/* Extra-small phones */
+@media (max-width: 576px) {
+    .content-header {
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .timeline-container {
+        padding-left: 0.75rem;
+    }
+
+    .timeline-container::before {
+        left: 20px;
+    }
+
+    .timeline-item::before {
+        left: 20px;
+    }
+
+    .timeline-year {
+        flex: 0 0 52px;
+        height: 52px;
+        font-size: 0.85rem;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.93rem;
+    }
+}

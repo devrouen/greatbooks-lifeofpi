@@ -3,6 +3,10 @@
 
 @section('title', 'Literary Analysis - Life of Pi')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/analysis.css') }}">
+@endpush
+
 @section('content')
 <div class="container">
     <div class="analysis-container">
@@ -14,10 +18,13 @@
         </div>
 
         <div class="analysis-content">
+            {{-- 01 – Interpretation of the Prose --}}
             <section class="analysis-section">
-                <div class="section-icon">🔍</div>
                 <div class="section-content">
-                    <h2>Interpretation of the Prose</h2>
+                    <div class="section-header">
+                        <span class="section-pill">01</span>
+                        <h2>Interpretation of the Prose</h2>
+                    </div>
                     <div class="interpretation-grid">
                         <div class="interpretation-card">
                             <strong>Dual Narratives</strong>
@@ -45,10 +52,13 @@
                 </div>
             </section>
 
+            {{-- 02 – Core Themes --}}
             <section class="analysis-section">
-                <div class="section-icon">💭</div>
                 <div class="section-content">
-                    <h2>Core Themes</h2>
+                    <div class="section-header">
+                        <span class="section-pill">02</span>
+                        <h2>Core Themes</h2>
+                    </div>
                     <div class="themes-grid">
                         <div class="theme-card">
                             <h3>Faith and Belief</h3>
@@ -82,10 +92,13 @@
                 </div>
             </section>
 
+            {{-- 03 – Literary Techniques --}}
             <section class="analysis-section">
-                <div class="section-icon">🎨</div>
                 <div class="section-content">
-                    <h2>Literary Techniques</h2>
+                    <div class="section-header">
+                        <span class="section-pill">03</span>
+                        <h2>Literary Techniques</h2>
+                    </div>
                     <div class="techniques-list">
                         <div class="technique-item">
                             <strong>Narrative Structure</strong>
@@ -100,7 +113,7 @@
                             </ul>
                         </div>
                         <div class="technique-item">
-                            <strong>Mood & Tone</strong>
+                            <strong>Mood &amp; Tone</strong>
                             <p>Shifts fluidly from wonder (bioluminescent sea) to horror (carnage on the lifeboat) to quiet reflection (prayers at sunset).</p>
                         </div>
                         <div class="technique-item">
@@ -115,10 +128,13 @@
                 </div>
             </section>
 
+            {{-- 04 – Ideas Beneath the Text --}}
             <section class="analysis-section">
-                <div class="section-icon">🧠</div>
                 <div class="section-content">
-                    <h2>Ideas Beneath the Text</h2>
+                    <div class="section-header">
+                        <span class="section-pill">04</span>
+                        <h2>Ideas Beneath the Text</h2>
+                    </div>
                     <div class="subtext-content">
                         <div class="subtext-item">
                             <strong>The Human Need for Meaning</strong>
@@ -136,10 +152,13 @@
                 </div>
             </section>
 
+            {{-- 05 – Significance for the Reader --}}
             <section class="analysis-section">
-                <div class="section-icon">❤️</div>
                 <div class="section-content">
-                    <h2>Significance for the Reader</h2>
+                    <div class="section-header">
+                        <span class="section-pill">05</span>
+                        <h2>Significance for the Reader</h2>
+                    </div>
                     <div class="significance-grid">
                         <div class="significance-card">
                             <strong>Personal Reflection</strong>
@@ -161,10 +180,13 @@
                 </div>
             </section>
 
+            {{-- 06 – Literary Merits & Standards --}}
             <section class="analysis-section">
-                <div class="section-icon">🏆</div>
                 <div class="section-content">
-                    <h2>Literary Merits & Standards</h2>
+                    <div class="section-header">
+                        <span class="section-pill">06</span>
+                        <h2>Literary Merits &amp; Standards</h2>
+                    </div>
                     <div class="merits-container">
                         <div class="merit-item">
                             <strong>1. Universality</strong>
@@ -200,178 +222,4 @@
         </div>
     </div>
 </div>
-
-@push('styles')
-<style>
-.analysis-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.analysis-section {
-    display: flex;
-    gap: 2rem;
-    margin: 3rem 0;
-    padding: 2.5rem;
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-}
-
-.section-icon {
-    flex: 0 0 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    color: white;
-}
-
-.section-content {
-    flex: 1;
-}
-
-.section-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
-.interpretation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
-}
-
-.interpretation-card {
-    background: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--accent-color);
-}
-
-.interpretation-card strong {
-    color: var(--primary-color);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.themes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-}
-
-.theme-card {
-    background: white;
-    padding: 1.75rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--primary-color);
-    transition: transform 0.3s ease;
-}
-
-.theme-card:hover {
-    transform: translateY(-3px);
-}
-
-.theme-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    font-size: 1.2rem;
-}
-
-.techniques-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin-top: 1.5rem;
-}
-
-.technique-item {
-    background: var(--bg-accent);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border-left: 4px solid var(--secondary-color);
-    line-height: 1.6;
-}
-
-.technique-item ul {
-    margin: 0.75rem 0 0 1.5rem;
-    padding-left: 0;
-}
-
-.technique-item li {
-    margin-bottom: 0.4rem;
-}
-
-.subtext-content, .merits-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin-top: 1.5rem;
-}
-
-.subtext-item, .merit-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--success-color);
-}
-
-.subtext-item strong, .merit-item strong {
-    color: var(--success-color);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.significance-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.25rem;
-    margin-top: 1.5rem;
-}
-
-.significance-card {
-    background: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--accent-color);
-}
-
-.significance-card strong {
-    color: var(--text-primary);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .analysis-section {
-        flex-direction: column;
-        padding: 1.5rem;
-    }
-
-    .section-icon {
-        align-self: center;
-        flex: 0 0 60px;
-        height: 60px;
-        font-size: 2rem;
-    }
-
-    .interpretation-grid,
-    .themes-grid,
-    .significance-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-@endpush
 @endsection

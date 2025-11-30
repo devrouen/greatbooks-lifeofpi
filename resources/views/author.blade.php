@@ -1,23 +1,49 @@
-<!-- resources/views/author.blade.php -->
+{{-- resources/views/author.blade.php --}}
 @extends('layouts.app')
 
 @section('title', 'About the Author - Yann Martel')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/author.css') }}">
+@endpush
+
 @section('content')
 <div class="container">
     <div class="author-container">
-        <div class="author-header">
-            <h1 class="page-title">About the Author</h1>
-            <p class="page-description">
-                Discover the life, influences, and literary journey of Yann Martel, the acclaimed author of <em>Life of Pi</em>.
-            </p>
+
+        {{-- HERO SECTION WITH IMAGE --}}
+        <div class="author-hero">
+            <div class="author-photo-wrapper">
+                <div class="author-photo-frame">
+                    {{-- Replace src with your actual author image --}}
+                    <img src="{{ asset('images/martel.jpg') }}" alt="Yann Martel" class="author-photo">
+                </div>
+                <div class="author-photo-glow"></div>
+            </div>
+
+            <div class="author-hero-content">
+                <h1 class="page-title">About the Author</h1>
+                <p class="page-description">
+                    Discover the life, influences, and literary journey of Yann Martel, the acclaimed author of
+                    <em>Life of Pi</em>.
+                </p>
+
+                <div class="author-meta-chips">
+                    <span class="meta-chip">Born 1963 · Salamanca, Spain</span>
+                    <span class="meta-chip">Canadian Author</span>
+                    <span class="meta-chip">Man Booker Prize Winner</span>
+                </div>
+            </div>
         </div>
 
         <div class="author-content">
+
             <section class="author-section">
-                <div class="section-icon">👨‍💻</div>
                 <div class="section-content">
-                    <h2>Biographical Overview</h2>
+                    <div class="section-header">
+                        <span class="section-pill">01</span>
+                        <h2><span></span>Biographical Overview</h2>
+                    </div>
                     <div class="bio-card">
                         <p>
                             <strong>Yann Martel</strong> was born on June 25, 1963, in Salamanca, Spain, to Canadian parents—both diplomats. 
@@ -37,9 +63,11 @@
             </section>
 
             <section class="author-section">
-                <div class="section-icon">🏆</div>
                 <div class="section-content">
-                    <h2>Breakthrough & Recognition</h2>
+                    <div class="section-header">
+                        <span class="section-pill">02</span>
+                        <h2>Breakthrough & Recognition</h2>
+                    </div>
                     <div class="achievement-content">
                         <div class="achievement-item">
                             <h3>Life of Pi (2001)</h3>
@@ -67,9 +95,11 @@
             </section>
 
             <section class="author-section">
-                <div class="section-icon">🌍</div>
                 <div class="section-content">
-                    <h2>Themes & Literary Philosophy</h2>
+                    <div class="section-header">
+                        <span class="section-pill">03</span>
+                        <h2>Themes & Literary Philosophy</h2>
+                    </div>
                     <div class="themes-grid">
                         <div class="theme-card">
                             <h3>Faith & Doubt</h3>
@@ -104,9 +134,11 @@
             </section>
 
             <section class="author-section">
-                <div class="section-icon">📚</div>
                 <div class="section-content">
-                    <h2>Major Works</h2>
+                    <div class="section-header">
+                        <span class="section-pill">04</span>
+                        <h2>Major Works</h2>
+                    </div>
                     <div class="works-container">
                         <div class="work-item">
                             <strong>The Facts Behind the Helsinki Roccamatios</strong> (1993)
@@ -137,9 +169,11 @@
             </section>
 
             <section class="author-section">
-                <div class="section-icon">💡</div>
                 <div class="section-content">
-                    <h2>Writing Process & Beliefs</h2>
+                    <div class="section-header">
+                        <span class="section-pill">05</span>
+                        <h2>Writing Process & Beliefs</h2>
+                    </div>
                     <div class="process-content">
                         <p>
                             Martel describes himself as a slow, meticulous writer who spends years researching and reflecting 
@@ -156,141 +190,8 @@
                     </div>
                 </div>
             </section>
+
         </div>
     </div>
 </div>
-
-@push('styles')
-<style>
-.author-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.author-section {
-    display: flex;
-    gap: 2rem;
-    margin: 3rem 0;
-    padding: 2.5rem;
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-}
-
-.section-icon {
-    flex: 0 0 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    color: white;
-}
-
-.section-content {
-    flex: 1;
-}
-
-.section-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
-.bio-card, .process-content {
-    background: var(--bg-accent);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    border-left: 4px solid var(--primary-color);
-    line-height: 1.7;
-}
-
-.achievement-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.achievement-item {
-    background: white;
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--secondary-color);
-}
-
-.achievement-item h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.themes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.theme-card {
-    background: var(--bg-secondary);
-    padding: 1.75rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--accent-color);
-    transition: transform 0.3s ease;
-}
-
-.theme-card:hover {
-    transform: translateY(-3px);
-}
-
-.theme-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.75rem;
-    font-size: 1.15rem;
-}
-
-.works-container {
-    margin-top: 1.5rem;
-}
-
-.work-item {
-    background: white;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--border-color);
-    line-height: 1.6;
-}
-
-.work-item strong {
-    color: var(--text-primary);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .author-section {
-        flex-direction: column;
-        padding: 1.5rem;
-    }
-
-    .section-icon {
-        align-self: center;
-        flex: 0 0 60px;
-        height: 60px;
-        font-size: 2rem;
-    }
-
-    .themes-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-@endpush
 @endsection

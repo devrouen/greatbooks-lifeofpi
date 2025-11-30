@@ -1,0 +1,536 @@
+/* =========================================
+   Plot Summary Page - Life of Pi
+   Matching Conventions / Author Design
+   ========================================= */
+
+:root {
+    --primary-color: #667eea;
+    --primary-color-dark: #4c51bf;
+    --accent-color: #9f7aea;
+    --bg-page: linear-gradient(135deg, #f5f6fa 0%, #bdb7d9 40%, #ede9fe 100%);
+    --bg-card: #ffffff;
+    --bg-soft: #fafaff;
+    --border-color: #e2e8f0;
+    --text-primary: #1f2933;
+    --text-secondary: #212325;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 18px 45px rgba(15, 23, 42, 0.16);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #9f7aea 100%);
+    --gradient-soft: linear-gradient(135deg, #eef2ff 0%, #fdf2ff 100%);
+}
+
+/* Page background */
+body {
+    background: var(--bg-page);
+}
+
+/* ============================
+   Wrapper & Header
+   ============================ */
+
+.summary-container {
+    padding: 2.5rem 0 3.5rem;
+    position: relative;
+}
+
+.summary-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.page-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.page-title::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    border-radius: 999px;
+    margin: 0.75rem auto 0;
+    background: var(--gradient-primary);
+}
+
+.page-description {
+    max-width: 720px;
+    margin: 1rem auto 0;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+}
+
+/* ============================
+   Sections (like convention-section)
+   ============================ */
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Section wrapper = icon + content card */
+.summary-section {
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+    position: relative;
+    padding: 1.2rem 1.2rem 1.2rem 0;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+        120deg,
+        rgba(102, 126, 234, 0.05),
+        rgba(118, 75, 162, 0.02)
+    );
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(22px);
+    animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* stagger appearance */
+.summary-section:nth-child(1) { animation-delay: 0.10s; }
+.summary-section:nth-child(2) { animation-delay: 0.18s; }
+.summary-section:nth-child(3) { animation-delay: 0.26s; }
+.summary-section:nth-child(4) { animation-delay: 0.34s; }
+.summary-section:nth-child(5) { animation-delay: 0.42s; }
+.summary-section:nth-child(6) { animation-delay: 0.50s; }
+.summary-section:nth-child(7) { animation-delay: 0.58s; }
+
+/* Icon bubble */
+.section-icon {
+    flex: 0 0 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    transform: translateY(0);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+/* Main card */
+.section-content {
+    flex: 1;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2.1rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+}
+
+/* Decorative glow */
+.section-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(102, 126, 234, 0.09), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* Section title */
+.section-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: var(--text-primary);
+}
+
+/* Underline animation */
+.section-content h2::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    border-radius: 999px;
+    margin-top: 0.4rem;
+    background: var(--gradient-primary);
+    transition: width 0.25s ease;
+}
+
+/* Hover interactions */
+.summary-section:hover .section-content,
+.summary-section:focus-within .section-content {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.55);
+    background-color: #fdfcff;
+}
+
+.summary-section:hover .section-content::before,
+.summary-section:focus-within .section-content::before {
+    opacity: 1;
+}
+
+.summary-section:hover .section-icon,
+.summary-section:focus-within .section-icon {
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 14px 32px rgba(102, 126, 234, 0.55);
+    filter: brightness(1.05);
+}
+
+.summary-section:hover .section-content h2::after,
+.summary-section:focus-within .section-content h2::after {
+    width: 70px;
+}
+
+/* ============================
+   Inner Cards – with more space
+   ============================ */
+
+/* General spacing: give space between heading and inner blocks */
+.part-card,
+.structure-content,
+.religion-card,
+.themes-grid,
+.conclusion-card {
+    margin-top: 1.1rem;
+}
+
+/* Base style for single cards */
+.part-card,
+.religion-card,
+.conclusion-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 1.6rem;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease,
+        background-color 0.28s ease,
+        filter 0.28s ease;
+    overflow: hidden;
+}
+
+/* Glow */
+.part-card::before,
+.religion-card::before,
+.conclusion-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(148, 163, 254, 0.16),
+        transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.part-card:hover,
+.religion-card:hover,
+.conclusion-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(129, 140, 248, 0.5);
+    background-color: #fdfcff;
+    filter: brightness(1.03);
+}
+
+.part-card:hover::before,
+.religion-card:hover::before,
+.conclusion-card:hover::before {
+    opacity: 1;
+}
+
+/* Text inside cards */
+.part-card p,
+.religion-card p,
+.conclusion-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.part-card p:last-child,
+.religion-card p:last-child,
+.conclusion-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================
+   Frame Narrative & Themes sections
+   ============================ */
+
+/* Frame narrative two-column layout */
+.structure-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.6rem;
+}
+
+.structure-item {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.4rem 1.5rem;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease,
+        background-color 0.28s ease,
+        filter 0.28s ease;
+    overflow: hidden;
+}
+
+.structure-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(148, 163, 254, 0.16),
+        transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.structure-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(129, 140, 248, 0.5);
+    background-color: #fdfcff;
+    filter: brightness(1.03);
+}
+
+.structure-item:hover::before {
+    opacity: 1;
+}
+
+.structure-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.45rem;
+    color: var(--text-primary);
+}
+
+.structure-item p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Key Themes grid */
+.themes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.6rem;
+}
+
+.theme-item {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.3rem 1.4rem;
+    transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease,
+        background-color 0.28s ease,
+        filter 0.28s ease;
+    overflow: hidden;
+}
+
+.theme-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top right,
+        rgba(148, 163, 254, 0.16),
+        transparent 55%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.theme-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(129, 140, 248, 0.5);
+    background-color: #fdfcff;
+    filter: brightness(1.03);
+}
+
+.theme-item:hover::before {
+    opacity: 1;
+}
+
+.theme-item strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--text-primary);
+}
+
+.theme-item p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ============================
+   Animations
+   ============================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(26px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+
+@media (max-width: 992px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .summary-container {
+        padding-top: 2.2rem;
+    }
+
+    .structure-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .summary-section {
+        flex-direction: column;
+        padding: 1.1rem 1.1rem 1.3rem;
+    }
+
+    .section-icon {
+        margin: 0 auto 0.6rem;
+    }
+
+    .section-content {
+        padding: 1.7rem 1.6rem;
+    }
+
+    .themes-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .summary-header {
+        padding: 0 1rem;
+    }
+
+    .section-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .section-content {
+        padding: 1.5rem 1.4rem;
+    }
+
+    .part-card,
+    .religion-card,
+    .conclusion-card,
+    .structure-item,
+    .theme-item {
+        padding: 1.3rem 1.35rem;
+    }
+}
+
+/* Text + image layout for the 3 main parts */
+.part-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.3fr); /* bigger image column */
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.part-text p {
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 0.85rem;
+}
+
+.part-text p:last-child {
+    margin-bottom: 0;
+}
+
+.part-image {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.part-image-frame {
+    width: 100%;
+    max-width: 420px; /* bigger image */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 34px rgba(15, 23, 42, 0.20);
+    transform: translateY(0);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+}
+
+.part-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.part-card:hover .part-image-frame {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 55px rgba(79, 70, 229, 0.38);
+    filter: brightness(1.05);
+}
+
+/* Stack on smaller screens */
+@media (max-width: 768px) {
+    .part-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+
+    .part-image {
+        justify-content: center;
+        order: -1; /* image first */
+    }
+
+    .part-image-frame {
+        max-width: 340px; /* bigger on mobile too */
+    }
+}

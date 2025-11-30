@@ -2,6 +2,11 @@
 
 @section('title', 'Literary Conventions - Life of Pi Analysis')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/conventions.css') }}">
+@endpush
+
+
 @section('content')
 <div class="container">
     <div class="conventions-container">
@@ -14,9 +19,9 @@
 
         <div class="conventions-content">
             <section class="convention-section">
-                <div class="section-icon">📚</div>
+                
                 <div class="section-content">
-                    <h2>Literary Movement</h2>
+                    <h2><span>Literary Movement</span></h2>
                     <div class="movement-info">
                         <div class="movement-card primary">
                             <h3>Contemporary Literary Fiction</h3>
@@ -49,9 +54,9 @@
             </section>
 
             <section class="convention-section">
-                <div class="section-icon">🎭</div>
+                
                 <div class="section-content">
-                    <h2>Genre Classifications</h2>
+                    <h2><span>Genre Classifications</span></h2>
                     <div class="genres-grid">
                         <div class="genre-card">
                             <h3>Survival Literature</h3>
@@ -113,9 +118,9 @@
             </section>
 
             <section class="convention-section">
-                <div class="section-icon">✍️</div>
+                
                 <div class="section-content">
-                    <h2>Narrative Techniques</h2>
+                    <h2><span>Narrative Techniques</span></h2>
                     <div class="techniques-container">
                         <div class="technique-item">
                             <h3>Frame Narrative</h3>
@@ -189,9 +194,9 @@
             </section>
 
             <section class="convention-section">
-                <div class="section-icon">🎨</div>
+                
                 <div class="section-content">
-                    <h2>Literary Devices</h2>
+                    <h2><span>Literary Devices</span></h2>
                     <div class="devices-container">
                         <div class="devices-row">
                             <div class="device-card">
@@ -257,9 +262,8 @@
             </section>
 
             <section class="convention-section">
-                <div class="section-icon">🌍</div>
                 <div class="section-content">
-                    <h2>Cultural & Historical Context</h2>
+                    <h2><span>Cultural & Historical Context</span></h2>
                     <div class="context-grid">
                         <div class="context-card">
                             <h3>Postcolonial Perspective</h3>
@@ -297,9 +301,8 @@
             </section>
 
             <section class="convention-section">
-                <div class="section-icon">📖</div>
                 <div class="section-content">
-                    <h2>Literary Precedents & Influences</h2>
+                    <h2><span>Literary Precedents & Influences</span></h2>
                     <div class="precedents-container">
                         <div class="precedent-category">
                             <h3>Survival Literature</h3>
@@ -355,9 +358,8 @@
             </section>
 
             <section class="convention-section">
-                <div class="section-icon">🎯</div>
                 <div class="section-content">
-                    <h2>Innovation & Contribution</h2>
+                    <h2><span>Innovation & Contribution</span></h2>
                     <div class="innovation-content">
                         <div class="innovation-item">
                             <h3>Unique Narrative Structure</h3>
@@ -397,316 +399,4 @@
     </div>
 </div>
 
-@push('styles')
-<style>
-.conventions-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.convention-section {
-    display: flex;
-    gap: 2rem;
-    margin: 3rem 0;
-    padding: 2.5rem;
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-}
-
-.section-icon {
-    flex: 0 0 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    background: var(--gradient-primary);
-    border-radius: 50%;
-    color: white;
-}
-
-.section-content {
-    flex: 1;
-}
-
-.section-content h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-primary);
-}
-
-.movement-card {
-    background: var(--bg-accent);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    margin-bottom: 2rem;
-    border-left: 4px solid var(--primary-color);
-}
-
-.influences-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.influence-item {
-    background: white;
-    padding: 1rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-color);
-}
-
-.genres-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.genre-card {
-    background: var(--bg-secondary);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.genre-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-
-.genre-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-}
-
-.genre-elements {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 1rem;
-}
-
-.element-tag {
-    background: var(--primary-color);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-.techniques-container {
-    display: grid;
-    gap: 2rem;
-    margin-top: 1.5rem;
-}
-
-.technique-item {
-    background: var(--bg-secondary);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-}
-
-.technique-item h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.technique-details {
-    margin-top: 1.5rem;
-    padding-top: 1.5rem;
-    border-top: 2px solid var(--border-color);
-}
-
-.technique-details h4 {
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.technique-details ul {
-    list-style: none;
-    padding: 0;
-}
-
-.technique-details li {
-    padding: 0.5rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-.technique-details li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: 600;
-}
-
-.devices-container {
-    margin-top: 1.5rem;
-}
-
-.devices-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.device-card {
-    background: white;
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-}
-
-.device-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-}
-
-.symbol-examples, .metaphor-examples {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.symbol-item, .metaphor-item {
-    padding: 1rem;
-    background: var(--bg-accent);
-    border-radius: var(--radius-sm);
-    border-left: 3px solid var(--accent-color);
-}
-
-.symbol-item strong, .metaphor-item strong {
-    color: var(--text-primary);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.context-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.context-card {
-    background: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--accent-color);
-}
-
-.context-card h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.precedents-container {
-    margin-top: 1.5rem;
-}
-
-.precedent-category {
-    margin-bottom: 2.5rem;
-}
-
-.precedent-category h3 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 0.5rem;
-}
-
-.precedent-examples {
-    display: grid;
-    gap: 1rem;
-}
-
-.precedent-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--secondary-color);
-}
-
-.precedent-item strong {
-    color: var(--text-primary);
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.innovation-content {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.innovation-item {
-    background: var(--bg-accent);
-    padding: 2rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--success-color);
-}
-
-.innovation-item h3 {
-    color: var(--success-color);
-    margin-bottom: 1rem;
-    font-size: 1.25rem;
-}
-
-@media (max-width: 768px) {
-    .convention-section {
-        flex-direction: column;
-        padding: 1.5rem;
-    }
-
-    .section-icon {
-        align-self: center;
-        flex: 0 0 60px;
-        height: 60px;
-        font-size: 2rem;
-    }
-
-    .genres-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .devices-row {
-        grid-template-columns: 1fr;
-    }
-
-    .context-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .influences-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .element-tag {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.5rem;
-    }
-}
-</style>
-@endpush
 @endsection

@@ -1,0 +1,710 @@
+/* =========================================
+   Literary Conventions Page - Life of Pi
+   ========================================= */
+
+:root {
+    --primary-color: #667eea;
+    --primary-color-dark: #4c51bf;
+    --accent-color: #764ba2;
+    --bg-page: linear-gradient(135deg, #f5f6fa 0%, #9c92d1 40%, #ede9fe 100%);
+    --bg-card: #ffffff;
+    --bg-soft: #f9fafb;
+    --border-color: #e2e8f0;
+    --text-primary: #1f2933;
+    --text-secondary: #212325;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 12px 30px rgba(15, 23, 42, 0.12);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-soft: linear-gradient(135deg, #eef2ff 0%, #fdf2ff 100%);
+}
+
+/* Page background (if layout doesn't already set one) */
+body {
+    background: var(--bg-page);
+}
+
+/* ============================
+   Wrapper & Header
+   ============================ */
+
+.conventions-container {
+    padding: 2.5rem 0 3.5rem;
+}
+
+.conventions-header {
+    text-align: center;
+    margin-bottom: 2.3rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.page-title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    position: relative;
+    display: inline-block;
+}
+
+.page-title::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    border-radius: 999px;
+    margin: 0.75rem auto 0;
+    background: var(--gradient-primary);
+}
+
+.page-description {
+    max-width: 720px;
+    margin: 1rem auto 0;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+}
+
+/* ============================
+   Sections
+   ============================ */
+
+.conventions-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* Each convention section wraps a single main card */
+.convention-section {
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.7s ease-out forwards;
+}
+
+/* stagger sections */
+.convention-section:nth-child(1) { animation-delay: 0.05s; }
+.convention-section:nth-child(2) { animation-delay: 0.1s; }
+.convention-section:nth-child(3) { animation-delay: 0.15s; }
+.convention-section:nth-child(4) { animation-delay: 0.2s; }
+.convention-section:nth-child(5) { animation-delay: 0.25s; }
+.convention-section:nth-child(6) { animation-delay: 0.3s; }
+.convention-section:nth-child(7) { animation-delay: 0.35s; }
+
+/* Main card */
+.section-content {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.9rem;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+}
+
+/* Slim accent bar on the left */
+.section-content::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.85rem;
+    bottom: 0.85rem;
+    width: 4px;
+    border-radius: 999px;
+    background: var(--gradient-primary);
+    opacity: 0.5;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* Soft corner glow */
+.section-content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(118, 75, 162, 0.12), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* Section title area */
+.section-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Little label chip next to h2 */
+.section-content h2::before {
+    content: 'Section';
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--primary-color-dark);
+}
+
+/* Underline accent on hover */
+.section-content h2 span {
+    display: inline-block;
+}
+
+.section-content h2 span::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    border-radius: 999px;
+    margin-top: 0.2rem;
+    background: var(--gradient-primary);
+    transition: width 0.25s ease;
+}
+
+/* If you want, you can wrap h2 text manually in <span> in Blade
+   but even without it this still looks fine. */
+
+/* Interaction: hover / focus */
+.convention-section:hover .section-content,
+.convention-section:focus-within .section-content {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.55);
+    background-color: #fdfcff;
+}
+
+.convention-section:hover .section-content::before,
+.convention-section:focus-within .section-content::before {
+    opacity: 1;
+    transform: translateX(1px);
+}
+
+.convention-section:hover .section-content::after,
+.convention-section:focus-within .section-content::after {
+    opacity: 1;
+}
+
+.convention-section:hover .section-content h2 span::after,
+.convention-section:focus-within .section-content h2 span::after {
+    width: 60px;
+}
+
+/* ============================
+   Movement / Influences
+   ============================ */
+
+.movement-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+}
+
+.movement-card {
+    padding: 1.4rem 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-soft);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.movement-card.primary {
+    background: var(--gradient-soft);
+    border-image: var(--gradient-primary) 1;
+}
+
+.movement-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.movement-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.movement-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+.movement-influences h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.influences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0.85rem;
+}
+
+.influence-item {
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius-md);
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.influence-item strong {
+    display: block;
+    font-size: 0.97rem;
+    margin-bottom: 0.35rem;
+    color: var(--text-primary);
+}
+
+.influence-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.influence-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: rgba(102, 126, 234, 0.4);
+    background-color: #f8f5ff;
+}
+
+/* ============================
+   Genres
+   ============================ */
+
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.4rem;
+    margin-top: 0.75rem;
+}
+
+.genre-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.genre-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(118, 75, 162, 0.09), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.genre-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.genre-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.genre-elements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.element-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    background: rgba(102, 126, 234, 0.06);
+    color: var(--primary-color-dark);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    cursor: default;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.genre-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.5);
+    background-color: #fdfcff;
+}
+
+.genre-card:hover::before {
+    opacity: 1;
+}
+
+.genre-card:hover .element-tag {
+    background: rgba(102, 126, 234, 0.12);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.25);
+}
+
+/* ============================
+   Narrative Techniques
+   ============================ */
+
+.techniques-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 0.75rem;
+}
+
+.technique-item {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 1.6rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.technique-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.45rem;
+    color: var(--text-primary);
+}
+
+.technique-item > p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+}
+
+.technique-details h4 {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-primary);
+}
+
+.technique-details ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+}
+
+.technique-details li + li {
+    margin-top: 0.25rem;
+}
+
+.technique-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.5);
+    background-color: #fdfcff;
+}
+
+/* ============================
+   Literary Devices
+   ============================ */
+
+.devices-container {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.devices-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.device-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.device-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.device-card p,
+.device-card li {
+    font-size: 0.94rem;
+    color: var(--text-secondary);
+}
+
+.device-card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.symbol-examples,
+.metaphor-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.symbol-item strong,
+.metaphor-item strong {
+    display: block;
+    font-size: 0.96rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.device-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.5);
+    background-color: #fdfcff;
+}
+
+/* ============================
+   Cultural Context
+   ============================ */
+
+.context-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.4rem;
+    margin-top: 0.75rem;
+}
+
+.context-card {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.3rem 1.4rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.context-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at bottom right, rgba(102, 126, 234, 0.09), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.context-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.context-card p {
+    font-size: 0.94rem;
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.context-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.45);
+    background-color: #fdfcff;
+}
+
+.context-card:hover::before {
+    opacity: 1;
+}
+
+/* ============================
+   Precedents & Influences
+   ============================ */
+
+.precedents-container {
+    margin-top: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.precedent-category {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem 1.6rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.precedent-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.precedent-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.precedent-item strong {
+    display: block;
+    font-size: 0.96rem;
+    color: var(--text-primary);
+}
+
+.precedent-item p {
+    margin: 0.25rem 0 0;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+}
+
+.precedent-category:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(118, 75, 162, 0.55);
+}
+
+/* ============================
+   Innovation
+   ============================ */
+
+.innovation-content {
+    margin-top: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.4rem;
+}
+
+.innovation-item {
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 1.3rem 1.4rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.innovation-item h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.innovation-item p {
+    font-size: 0.94rem;
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.innovation-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(102, 126, 234, 0.5);
+    background-color: #fdfcff;
+}
+
+/* ============================
+   Animations
+   ============================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================
+   Responsive
+   ============================ */
+
+@media (max-width: 992px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .conventions-container {
+        padding-top: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-content {
+        padding: 1.4rem 1.35rem;
+    }
+
+    .section-content::before {
+        top: 0.75rem;
+        bottom: 0.75rem;
+    }
+
+    .movement-info {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .genres-grid,
+    .techniques-container,
+    .context-grid,
+    .precedents-container,
+    .innovation-content {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .devices-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-description {
+        padding: 0 1rem;
+        font-size: 0.98rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .conventions-header {
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .section-content h2 {
+        font-size: 1.3rem;
+        flex-wrap: wrap;
+    }
+
+    .section-content {
+        padding: 1.25rem 1.1rem;
+    }
+}
